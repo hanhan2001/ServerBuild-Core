@@ -4,6 +4,7 @@ import me.xiaoying.serverbuild.file.FileManager;
 import me.xiaoying.serverbuild.file.SimpleFileManager;
 import me.xiaoying.serverbuild.module.ModuleManager;
 import me.xiaoying.serverbuild.module.SimpleModuleManager;
+import me.xiaoying.sql.SqlFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.PluginCommand;
@@ -20,6 +21,7 @@ public class SBPlugin {
     private static JavaPlugin instance;
     private static FileManager fileManager = new SimpleFileManager();
     private static ModuleManager moduleManager = new SimpleModuleManager();
+    private static SqlFactory sqlFactory;
 
     public static JavaPlugin getInstance() {
         return instance;
@@ -46,10 +48,28 @@ public class SBPlugin {
     }
 
     /**
-     * 移除插件命令
+     * Get SqlFactory
      *
-     * @param command 主命令名称
-     * @param plugin 插件
+     * @return SqlFactory
+     */
+    public static SqlFactory getSqlFactory() {
+        return sqlFactory;
+    }
+
+    /**
+     * Set SqlFactory
+     *
+     * @param sqlFactory SqlFactory
+     */
+    public static void setSqlFactory(SqlFactory sqlFactory) {
+        SBPlugin.sqlFactory = sqlFactory;
+    }
+
+    /**
+     * unregister command
+     *
+     * @param command Command
+     * @param plugin Plugin
      */
     public static void unregisterCommand(String command, Plugin plugin) {
         try {
@@ -76,10 +96,10 @@ public class SBPlugin {
     }
 
     /**
-     * 注册插件指令
+     * Register command
      *
-     * @param command 命令
-     * @param plugin 插件
+     * @param command Command
+     * @param plugin Plugin
      */
     public static void registerCommand(String command, Plugin plugin) {
         try {
