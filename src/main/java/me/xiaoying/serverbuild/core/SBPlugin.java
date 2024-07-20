@@ -4,6 +4,7 @@ import me.xiaoying.serverbuild.file.FileManager;
 import me.xiaoying.serverbuild.file.SimpleFileManager;
 import me.xiaoying.serverbuild.module.ModuleManager;
 import me.xiaoying.serverbuild.module.SimpleModuleManager;
+import me.xiaoying.serverbuild.script.ScriptManager;
 import me.xiaoying.sql.SqlFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -19,6 +20,7 @@ import java.util.Map;
 
 public class SBPlugin {
     private static JavaPlugin instance;
+    private static ScriptManager scriptManager;
     private static FileManager fileManager = new SimpleFileManager();
     private static ModuleManager moduleManager = new SimpleModuleManager();
     private static SqlFactory sqlFactory;
@@ -29,6 +31,17 @@ public class SBPlugin {
 
     public static void setInstance(JavaPlugin plugin) {
         instance = plugin;
+    }
+
+    public static ScriptManager getScriptManager() {
+        return scriptManager;
+    }
+
+    public static void setScriptManager(ScriptManager scriptManager) {
+        if (SBPlugin.scriptManager != null)
+            return;
+
+        SBPlugin.scriptManager = scriptManager;
     }
 
     public static ModuleManager getModuleManager() {
