@@ -36,6 +36,9 @@ public class SBPlugin {
     }
 
     public static void setModuleManager(ModuleManager moduleManager) {
+        if (SBPlugin.moduleManager != null)
+            return;
+
         SBPlugin.moduleManager = moduleManager;
     }
 
@@ -44,6 +47,9 @@ public class SBPlugin {
     }
 
     public static void setFileManager(FileManager fileManager) {
+        if (SBPlugin.fileManager != null)
+            return;
+
         SBPlugin.fileManager = fileManager;
     }
 
