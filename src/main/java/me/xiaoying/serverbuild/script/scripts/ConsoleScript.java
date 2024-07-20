@@ -25,6 +25,8 @@ public class ConsoleScript implements Script {
             stringBuilder.append(" ");
         }
 
+        while (stringBuilder.toString().endsWith(" "))
+            stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length() - 1);
         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), stringBuilder.toString());
     }
 
