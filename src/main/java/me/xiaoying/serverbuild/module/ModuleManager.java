@@ -9,7 +9,7 @@ public interface ModuleManager {
 
     void unregisterModules();
 
-    List<Module> getKnownModules();
+    List<Module> getModules();
 
     void enableModules();
 
