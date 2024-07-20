@@ -8,7 +8,7 @@ public abstract class File {
     private YamlConfiguration configuration;
 
     public File(String file) {
-        this.file = new java.io.File(file);
+        this.file = new java.io.File(SBPlugin.getInstance().getDataFolder(), file);
     }
 
     public File(String path, String name) {
