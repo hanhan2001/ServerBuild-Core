@@ -27,6 +27,11 @@ public class VariableFactory {
         return this;
     }
 
+    public VariableFactory message(String message) {
+        this.string = this.string.replace("%message%", message);
+        return this;
+    }
+
     public VariableFactory placeholder(Player player) {
         try {
             this.string = PlaceholderAPI.setPlaceholders(player, this.string);
