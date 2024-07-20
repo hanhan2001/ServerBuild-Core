@@ -43,7 +43,7 @@ public class SimpleModuleManager implements ModuleManager {
 
     @Override
     public List<Module> getModules() {
-        return Collections.emptyList();
+        return this.knownModules;
     }
 
     @Override
