@@ -33,7 +33,7 @@ public class SimpleModuleManager implements ModuleManager {
     @Override
     public Module getModule(String name) {
         for (Module knownModule : this.knownModules) {
-            if (!knownModule.getName().equalsIgnoreCase(name))
+            if (!knownModule.getAliasName().equalsIgnoreCase(name))
                 continue;
 
             return knownModule;
