@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 /**
  * Script console
  */
-public class Console implements Script {
+public class ConsoleScript implements Script {
     @Override
     public String getName() {
         return "console";

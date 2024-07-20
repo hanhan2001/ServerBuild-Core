@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 /**
  * Script send
  */
-public class Send implements Script {
+public class SendScript implements Script {
     @Override
     public String getName() {
         return "send";
