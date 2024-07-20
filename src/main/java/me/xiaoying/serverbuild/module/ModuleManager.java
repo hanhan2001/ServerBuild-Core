@@ -9,6 +9,8 @@ public interface ModuleManager {
 
     void unregisterModules();
 
+    Module getModule(String name);
+
     List<Module> getModules();
 
     void enableModules();

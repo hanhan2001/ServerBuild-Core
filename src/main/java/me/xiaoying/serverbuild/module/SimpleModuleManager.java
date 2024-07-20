@@ -31,6 +31,17 @@ public class SimpleModuleManager implements ModuleManager {
     }
 
     @Override
+    public Module getModule(String name) {
+        for (Module knownModule : this.knownModules) {
+            if (!knownModule.getName().equalsIgnoreCase(name))
+                continue;
+
+            return knownModule;
+        }
+        return null;
+    }
+
+    @Override
     public List<Module> getModules() {
         return Collections.emptyList();
     }
