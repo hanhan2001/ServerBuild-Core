@@ -1,5 +1,6 @@
 package me.xiaoying.serverbuild.factory;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.text.SimpleDateFormat;
@@ -13,6 +14,11 @@ public class VariableFactory {
 
     public VariableFactory(String string) {
         this.string = string;
+    }
+
+    public VariableFactory color() {
+        this.string = ChatColor.translateAlternateColorCodes('&', this.string);
+        return this;
     }
 
     public VariableFactory date(String format) {
