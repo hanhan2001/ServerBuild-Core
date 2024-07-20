@@ -35,7 +35,13 @@
                                 <filter>
                                     <artifact>*:*</artifact>
                                     <excludes>
-                                        <exclude>org/spigot/**</exclude>
+                                        <exclude>org/**</exclude>
+                                        <exclude>net/**</exclude>
+                                        <exclude>com/**</exclude>
+                                        <exclude>google/**</exclude>
+                                        <exclude>javax/**</exclude>
+                                        <exclude>mojang-translations/**</exclude>
+                                        <exclude>sqlite-jdbc.properties</exclude>
                                     </excludes>
                                 </filter>
                             </filters>
