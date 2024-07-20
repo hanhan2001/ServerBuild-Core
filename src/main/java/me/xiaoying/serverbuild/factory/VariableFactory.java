@@ -1,5 +1,6 @@
 package me.xiaoying.serverbuild.factory;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -23,6 +24,13 @@ public class VariableFactory {
 
     public VariableFactory date(String format) {
         this.string = this.string.replace("%date%", new SimpleDateFormat(format).format(new Date()));
+        return this;
+    }
+
+    public VariableFactory placeholder(Player player) {
+        try {
+            this.string = PlaceholderAPI.setPlaceholders(player, this.string);
+        } catch (Exception e) {}
         return this;
     }
 
