@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Module {
+    private boolean opened = false;
+
     private final List<Listener> listeners = new ArrayList<>();
     private final List<File> files = new ArrayList<>();
 
@@ -29,11 +31,20 @@ public abstract class Module {
     public abstract String getAliasName();
 
     /**
-     * Decode whether to enable module
+     * Decide whether to enable module
      *
      * @return Boolean
      */
     public abstract boolean ready();
+
+    /**
+     * Determine whether to activated
+     *
+     * @return Boolean
+     */
+    public boolean opened() {
+        return this.opened;
+    }
 
     /**
      * Get Listeners
@@ -74,6 +85,8 @@ public abstract class Module {
     public void enable() {
         // register listeners
         this.listeners.forEach(listener ->  Bukkit.getPluginManager().registerEvents(listener, SBPlugin.getInstance()));
+
+        this.opened = true;
     }
 
     public void disable() {
@@ -81,6 +94,8 @@ public abstract class Module {
         this.listeners.forEach(HandlerList::unregisterAll);
         // unregister files
         this.files.forEach(File::disable);
+
+        this.opened = false;
     }
 
     public abstract void onEnable();
