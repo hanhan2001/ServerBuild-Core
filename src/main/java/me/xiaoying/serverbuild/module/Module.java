@@ -29,6 +29,13 @@ public abstract class Module {
     public abstract String getAliasName();
 
     /**
+     * Decode whether to enable module
+     *
+     * @return Boolean
+     */
+    public abstract boolean ready();
+
+    /**
      * Get Listeners
      *
      * @return ArrayList
