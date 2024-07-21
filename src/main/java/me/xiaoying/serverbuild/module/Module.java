@@ -130,6 +130,7 @@ public abstract class Module {
         });
 
         this.opened = true;
+        this.onEnable();
     }
 
     public void disable() {

@@ -48,10 +48,7 @@ public class SimpleModuleManager implements ModuleManager {
 
     @Override
     public void enableModules() {
-        this.knownModules.forEach(module -> {
-            module.onEnable();
-            module.enable();
-        });
+        this.knownModules.forEach(Module::enable);
     }
 
     @Override
