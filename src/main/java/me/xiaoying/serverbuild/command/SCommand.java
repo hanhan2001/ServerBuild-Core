@@ -1,5 +1,7 @@
 package me.xiaoying.serverbuild.command;
 
+import me.xiaoying.serverbuild.factory.VariableFactory;
+import me.xiaoying.serverbuild.module.Module;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +15,28 @@ import java.util.*;
  * Command SubCommand
  */
 public abstract class SCommand {
+    private Module module = null;
     private final Map<String, List<RegisteredCommand>> registeredCommands = new HashMap<>();
+
+    public SCommand() {}
+
+    /**
+     * Constructor
+     *
+     * @param module Module
+     */
+    public SCommand(Module module) {
+        this.module = module;
+    }
+
+    /**
+     * Get module form this
+     *
+     * @return Model
+     */
+    public Module getModule() {
+        return this.module;
+    }
 
     /**
      * Register new command
@@ -113,8 +136,12 @@ public abstract class SCommand {
         return new TabExecutor() {
             @Override
             public boolean onCommand(@NotNull CommandSender sender, @NotNull org.bukkit.command.Command cmd, @NotNull String s, @NotNull String[] strings) {
+                if (!SCommand.this.getLengths().contains(strings.length)) {
+                    SCommand.this.getHelpMessage().forEach(sender::sendMessage);
+                    return false;
+                }
                 performCommand(sender, strings);
-                return false;
+                return true;
             }
 
             @Nullable
