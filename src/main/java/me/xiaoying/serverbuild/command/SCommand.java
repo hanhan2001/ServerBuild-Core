@@ -14,28 +14,7 @@ import java.util.*;
  * Command SubCommand
  */
 public abstract class SCommand {
-    private Module module = null;
     private final Map<String, List<RegisteredCommand>> registeredCommands = new HashMap<>();
-
-    public SCommand() {}
-
-    /**
-     * Constructor
-     *
-     * @param module Module
-     */
-    public SCommand(Module module) {
-        this.module = module;
-    }
-
-    /**
-     * Get module form this
-     *
-     * @return Model
-     */
-    public Module getModule() {
-        return this.module;
-    }
 
     /**
      * Register new command
