@@ -5,9 +5,9 @@ package me.xiaoying.serverbuild.command;
  */
 public class RegisteredCommand {
     int length;
-    SubCommand subCommand;
+    SCommand subCommand;
 
-    public RegisteredCommand(int length, SubCommand subCommand) {
+    public RegisteredCommand(int length, SCommand subCommand) {
         this.length = length;
         this.subCommand = subCommand;
     }
@@ -16,7 +16,7 @@ public class RegisteredCommand {
         return this.length;
     }
 
-    public SubCommand getSubCommand() {
+    public SCommand getSubCommand() {
         return this.subCommand;
     }
 }

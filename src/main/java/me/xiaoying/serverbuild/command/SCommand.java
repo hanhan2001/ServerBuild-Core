@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Command SubCommand
  */
-public abstract class SubCommand {
+public abstract class SCommand {
     private final Map<String, List<RegisteredCommand>> registeredCommands = new HashMap<>();
 
     /**
@@ -17,7 +17,7 @@ public abstract class SubCommand {
      *
      * @param subCommand SubCommand
      */
-    public void registerCommand(SubCommand subCommand) {
+    public void registerCommand(SCommand subCommand) {
         me.xiaoying.serverbuild.command.Command command = subCommand.getClass().getAnnotation(me.xiaoying.serverbuild.command.Command.class);
 
         if (command == null) {
