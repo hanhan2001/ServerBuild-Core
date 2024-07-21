@@ -73,6 +73,12 @@ public abstract class Module {
             return;
 
         this.listeners.add(listener);
+
+        // register listener immediately if module opened
+        if (!this.opened)
+            return;
+
+        Bukkit.getPluginManager().registerEvents(listener, SBPlugin.getInstance());
     }
 
     /**
@@ -107,6 +113,22 @@ public abstract class Module {
             return;
 
         this.commands.add(command);
+
+        // register command immediately if module opened
+        if (!this.opened)
+            return;
+
+        Command annotation = command.getClass().getAnnotation(Command.class);
+
+        if (annotation == null) {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&eFined some command(" + command.getClass().getName() + ") don't use Command annotation, please check your code!"));
+            return;
+        }
+
+        for (String value : annotation.values()) {
+            SBPlugin.registerCommand(value, SBPlugin.getInstance());
+            SBPlugin.getInstance().getCommand(value).setExecutor(command.getTabExecutor());
+        }
     }
 
     public abstract void init();
