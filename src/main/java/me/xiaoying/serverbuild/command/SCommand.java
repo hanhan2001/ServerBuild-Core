@@ -48,6 +48,16 @@ public abstract class SCommand {
     }
 
     /**
+     * Get command set value
+     *
+     * @return
+     */
+    public List<String> getValues() {
+        Command command = this.getClass().getAnnotation(Command.class);
+        return new ArrayList<>(Arrays.asList(command.values()).subList(0, command.values().length));
+    }
+
+    /**
      * Get command supported length
      *
      * @return ArrayList
