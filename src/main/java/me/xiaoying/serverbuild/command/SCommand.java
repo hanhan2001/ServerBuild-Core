@@ -17,6 +17,15 @@ public abstract class SCommand {
     private final Map<String, List<RegisteredCommand>> registeredCommands = new HashMap<>();
 
     /**
+     * Get registered commands
+     *
+     * @return HashMap
+     */
+    public Map<String, List<RegisteredCommand>> getRegisteredCommands() {
+        return this.registeredCommands;
+    }
+
+    /**
      * Register new command
      *
      * @param subCommand SubCommand
