@@ -38,6 +38,25 @@ public abstract class SCommand {
     }
 
     /**
+     * Get command supported length
+     *
+     * @return ArrayList
+     */
+    public List<Integer> getLengths() {
+        List<Integer> list = new ArrayList<>();
+        for (int i : this.getClass().getAnnotation(Command.class).length())
+            list.add(i);
+        return list;
+    }
+
+    /**
+     * Get help command for this command
+     *
+     * @return ArrayList
+     */
+    public abstract List<String> getHelpMessage();
+
+    /**
      * Perform command
      *
      * @param sender Sender
