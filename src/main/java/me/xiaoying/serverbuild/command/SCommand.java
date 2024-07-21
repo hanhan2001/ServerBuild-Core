@@ -3,6 +3,9 @@ package me.xiaoying.serverbuild.command;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -18,7 +21,7 @@ public abstract class SCommand {
      * @param subCommand SubCommand
      */
     public void registerCommand(SCommand subCommand) {
-        me.xiaoying.serverbuild.command.Command command = subCommand.getClass().getAnnotation(me.xiaoying.serverbuild.command.Command.class);
+        Command command = subCommand.getClass().getAnnotation(Command.class);
 
         if (command == null) {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&eFined some command(" + subCommand.getClass().getName() + ") don't use Command annotation, please check your code!"));
@@ -80,5 +83,26 @@ public abstract class SCommand {
             return l;
         }
         return new ArrayList<>();
+    }
+
+    /**
+     * Get bukkit TabExecutor
+     *
+     * @return TabExecutor
+     */
+    public TabExecutor getTabExecutor() {
+        return new TabExecutor() {
+            @Override
+            public boolean onCommand(@NotNull CommandSender sender, @NotNull org.bukkit.command.Command cmd, @NotNull String s, @NotNull String[] strings) {
+                performCommand(sender, strings);
+                return false;
+            }
+
+            @Nullable
+            @Override
+            public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull org.bukkit.command.Command cmd, @NotNull String s, @NotNull String[] strings) {
+                return SCommand.this.onTabComplete(sender, cmd, s, strings);
+            }
+        };
     }
 }
