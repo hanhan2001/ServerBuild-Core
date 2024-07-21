@@ -49,13 +49,13 @@ public abstract class SCommand {
      * Perform tab<br>
      * If you don't want sender get command help message, you can override this method and return empty list
      *
-     * @param commandSender Sender
+     * @param sender Sender
      * @param command Command
-     * @param s Command head
+     * @param head Command head
      * @param strings Command's functions
      * @return ArrayList
      */
-    public List<String> onTabComplete(CommandSender commandSender, org.bukkit.command.Command command, String s, String[] strings) {
+    public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String head, String[] strings) {
         List<String> list = new ArrayList<>(registeredCommands.keySet());
         if (strings.length == 1) {
             List<String> conditionList = new ArrayList<>();
@@ -77,7 +77,7 @@ public abstract class SCommand {
         strings = new ArrayList<>(Arrays.asList(strings).subList(1, strings.length)).toArray(new String[0]);
         for (RegisteredCommand registeredCommand1 : registeredCommand) {
             List<String> l;
-            if ((l = registeredCommand1.getSubCommand().onTabComplete(commandSender, command, s, strings)) == null)
+            if ((l = registeredCommand1.getSubCommand().onTabComplete(sender, command, head, strings)) == null)
                 return null;
 
             return l;
