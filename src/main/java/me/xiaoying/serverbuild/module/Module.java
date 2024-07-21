@@ -7,12 +7,8 @@ import me.xiaoying.serverbuild.core.SBPlugin;
 import me.xiaoying.serverbuild.file.File;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
