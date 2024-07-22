@@ -5,6 +5,7 @@ import me.xiaoying.serverbuild.command.RegisteredCommand;
 import me.xiaoying.serverbuild.command.SCommand;
 import me.xiaoying.serverbuild.core.SBPlugin;
 import me.xiaoying.serverbuild.file.File;
+import me.xiaoying.serverbuild.scheduler.Scheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.HandlerList;
@@ -19,6 +20,7 @@ public abstract class Module {
     private final List<File> files = new ArrayList<>();
     private final List<SCommand> commands = new ArrayList<>();
     private final List<Listener> listeners = new ArrayList<>();
+    private final List<Scheduler> schedulers = new ArrayList<>();
 
     /**
      * Get name of Module
@@ -78,6 +80,65 @@ public abstract class Module {
     }
 
     /**
+     * Unregister listener
+     *
+     * @param listener Listener
+     */
+    public void unregisterListener(Listener listener) {
+        if (!this.listeners.contains(listener))
+            return;
+
+        HandlerList.unregisterAll(listener);
+    }
+
+    /**
+     * Unregister all listeners
+     */
+    public void unregisterListeners() {
+        this.listeners.forEach(HandlerList::unregisterAll);
+        this.listeners.clear();
+    }
+
+    /**
+     * Register scheduler
+     *
+     * @param scheduler Scheduler
+     */
+    public void registerScheduler(Scheduler scheduler) {
+        if (this.schedulers.contains(scheduler))
+            return;
+
+        this.schedulers.add(scheduler);
+
+        // register listener immediately if module opened
+        if (!this.opened)
+            return;
+
+        scheduler.run();
+    }
+
+    /**
+     * Unregister scheduler
+     *
+     * @param scheduler Scheduler
+     */
+    public void unregisterScheduler(Scheduler scheduler) {
+        if (!this.schedulers.contains(scheduler))
+            return;
+
+        scheduler.stop();
+        this.schedulers.remove(scheduler);
+    }
+
+    /**
+     * Unregister all schedulers
+     */
+    public void unregisterSchedulers() {
+        this.schedulers.forEach(Scheduler::stop);
+        this.schedulers.clear();
+    }
+
+    /**
      * Register file
      *
      * @param file File
@@ -127,6 +188,25 @@ public abstract class Module {
         }
     }
 
+    /**
+     * Unregister command
+     *
+     * @param command SCommand
+     */
+    public void unregisterCommand(SCommand command) {
+        command.getValues().forEach(string -> SBPlugin.unregisterCommand(string, SBPlugin.getInstance()));
+    }
+
+    /**
+     * Unregister all commands
+     */
+    public void unregisterCommands() {
+        this.commands.forEach(this::unregisterCommand);
+    }
+
+    /**
+     * Initialize module
+     */
     public abstract void init();
 
     public void enable() {
