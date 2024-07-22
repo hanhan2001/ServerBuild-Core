@@ -226,6 +226,8 @@ public abstract class Module {
                 SBPlugin.getInstance().getCommand(value).setExecutor(command.getTabExecutor());
             }
         });
+        // scheduler
+        this.schedulers.forEach(Scheduler::run);
 
         this.opened = true;
         this.onEnable();
@@ -236,6 +238,8 @@ public abstract class Module {
         this.listeners.forEach(HandlerList::unregisterAll);
         // unregister files
         this.files.forEach(File::disable);
+        // unregister Scheduler
+        this.schedulers.forEach(Scheduler::stop);
 
         this.opened = false;
     }
