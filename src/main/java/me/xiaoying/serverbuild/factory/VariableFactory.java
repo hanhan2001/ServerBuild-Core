@@ -23,6 +23,16 @@ public class VariableFactory {
         return this;
     }
 
+    public VariableFactory chunks(int chunks) {
+        this.string = this.string.replace("%chunks%", String.valueOf(chunks));
+        return this;
+    }
+
+    public VariableFactory entities(int entities) {
+        this.string = this.string.replace("%entities%", String.valueOf(entities));
+        return this;
+    }
+
     public VariableFactory color() {
         this.string = ChatColor.translateAlternateColorCodes('&', this.string);
         return this;
