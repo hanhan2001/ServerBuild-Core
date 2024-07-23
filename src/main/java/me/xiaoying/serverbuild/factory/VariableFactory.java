@@ -17,6 +17,11 @@ public class VariableFactory {
         this.string = string;
     }
 
+    public VariableFactory amount(int amount) {
+        this.string = this.string.replace("%amount%", String.valueOf(amount));
+        return this;
+    }
+
     public VariableFactory color() {
         this.string = ChatColor.translateAlternateColorCodes('&', this.string);
         return this;
