@@ -16,42 +16,33 @@ import org.bukkit.scheduler.BukkitScheduler;
  * </ul>
  */
 public abstract class Scheduler {
-    private final Runnable runnable;
     private final Type type;
     private long delay = 0L;
     private int id;
 
     /**
      * Constructor
-     *
-     * @param name name of scheduler
-     * @param runnable Runnable
      */
-    public Scheduler(String name, Runnable runnable) {
-        this.runnable = runnable;
+    public Scheduler() {
         this.type = Type.SYNC_DELAY;
     }
 
     /**
      * Constructor
      *
-     * @param runnable Runnable
      * @param type Scheduler's type
      */
-    public Scheduler(String name, Runnable runnable, Scheduler.Type type) {
-        this.runnable = runnable;
+    public Scheduler(Scheduler.Type type) {
         this.type = type;
     }
 
     /**
      * Constructor
      *
-     * @param runnable Runnable
      * @param type Scheduler's type
      * @param delay Delay
      */
-    public Scheduler(String name, Runnable runnable, Scheduler.Type type, long delay) {
-        this.runnable = runnable;
+    public Scheduler(Scheduler.Type type, long delay) {
         this.type = type;
         this.delay = delay;
     }
@@ -79,9 +70,7 @@ public abstract class Scheduler {
      *
      * @return Runnable
      */
-    public Runnable getRunnable() {
-        return this.runnable;
-    }
+    public abstract Runnable getRunnable();
 
     /**
      * Get type of scheduler
@@ -108,16 +97,16 @@ public abstract class Scheduler {
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();;
         switch (this.type) {
             case SYNC_DELAY:
-                this.id = scheduler.scheduleSyncDelayedTask(SBPlugin.getInstance(), this.runnable, this.delay);
+                this.id = scheduler.scheduleSyncDelayedTask(SBPlugin.getInstance(), this.getRunnable(), this.delay);
                 break;
             case SYNC_REPEAT:
-                this.id = scheduler.scheduleSyncRepeatingTask(SBPlugin.getInstance(), this.runnable, 0, this.delay);
+                this.id = scheduler.scheduleSyncRepeatingTask(SBPlugin.getInstance(), this.getRunnable(), 0, this.delay);
                 break;
             case ASYNC_DELAY:
-                this.id = scheduler.runTaskLaterAsynchronously(SBPlugin.getInstance(), this.runnable, this.delay).getTaskId();
+                this.id = scheduler.runTaskLaterAsynchronously(SBPlugin.getInstance(), this.getRunnable(), this.delay).getTaskId();
                 break;
             case ASYNC_REPEAT:
-                this.id = scheduler.runTaskLater(SBPlugin.getInstance(), this.runnable, this.delay).getTaskId();
+                this.id = scheduler.runTaskLater(SBPlugin.getInstance(), this.getRunnable(), this.delay).getTaskId();
                 break;
         }
     }
