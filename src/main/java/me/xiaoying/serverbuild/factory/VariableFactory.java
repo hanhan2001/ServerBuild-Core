@@ -2,6 +2,7 @@ package me.xiaoying.serverbuild.factory;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.text.SimpleDateFormat;
@@ -69,6 +70,15 @@ public class VariableFactory {
     public VariableFactory time(String time) {
         this.string = this.string.replace("%time%", time);
         return this;
+    }
+
+    public VariableFactory world(String world) {
+        this.string = this.string.replace("%world%", world);
+        return this;
+    }
+
+    public VariableFactory world(World world) {
+        return this.world(world.getName());
     }
 
     @Override
