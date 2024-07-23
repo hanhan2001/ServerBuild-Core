@@ -99,7 +99,7 @@ public abstract class SCommand {
         if (strings.length == 1) {
             List<String> conditionList = new ArrayList<>();
             for (String s1 : list) {
-                if (!s1.startsWith(strings[0]))
+                if (!s1.toUpperCase(Locale.ENGLISH).startsWith(strings[0].toUpperCase(Locale.ENGLISH)))
                     continue;
                 conditionList.add(s1);
             }
