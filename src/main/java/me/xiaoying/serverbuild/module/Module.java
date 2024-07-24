@@ -234,12 +234,14 @@ public abstract class Module {
     }
 
     public void disable() {
-        // unregister listeners
-        this.listeners.forEach(HandlerList::unregisterAll);
-        // unregister files
-        this.files.forEach(File::disable);
         // unregister Scheduler
         this.schedulers.forEach(Scheduler::stop);
+
+        // unregister listeners
+        this.listeners.forEach(HandlerList::unregisterAll);
+
+        // unregister files
+        this.files.forEach(File::disable);
 
         this.opened = false;
     }
