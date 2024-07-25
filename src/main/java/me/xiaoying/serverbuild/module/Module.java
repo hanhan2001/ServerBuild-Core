@@ -244,6 +244,9 @@ public abstract class Module {
         // unregister listeners
         this.listeners.forEach(HandlerList::unregisterAll);
 
+        // unregister commands
+        this.commands.forEach(command -> command.getValues().forEach(string -> SBPlugin.unregisterCommand(string, SBPlugin.getInstance())));
+
         // unregister files
         this.files.forEach(File::disable);
 
