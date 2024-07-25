@@ -236,6 +236,8 @@ public abstract class Module {
     }
 
     public void disable() {
+        this.onDisable();
+
         // unregister Scheduler
         this.schedulers.forEach(Scheduler::stop);
 
@@ -246,6 +248,11 @@ public abstract class Module {
         this.files.forEach(File::disable);
 
         this.opened = false;
+    }
+
+    public void reload() {
+        this.disable();
+        this.enable();
     }
 
     public abstract void onEnable();
