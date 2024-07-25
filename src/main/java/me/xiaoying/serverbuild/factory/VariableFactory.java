@@ -1,6 +1,7 @@
 package me.xiaoying.serverbuild.factory;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -49,9 +50,10 @@ public class VariableFactory {
     }
 
     public VariableFactory placeholder(Player player) {
-        try {
-            this.string = PlaceholderAPI.setPlaceholders(player, this.string);
-        } catch (Exception e) {}
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null)
+            return this;
+
+        this.string = PlaceholderAPI.setPlaceholders(player, this.string);
         return this;
     }
 
