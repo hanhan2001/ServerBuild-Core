@@ -210,8 +210,6 @@ public abstract class Module {
     public abstract void init();
 
     public void enable() {
-        this.init();
-
         // register listeners
         this.listeners.forEach(listener ->  Bukkit.getPluginManager().registerEvents(listener, SBPlugin.getInstance()));
         // register commands
@@ -255,6 +253,8 @@ public abstract class Module {
 
     public void reload() {
         this.disable();
+
+        this.init();
         this.enable();
     }
 
