@@ -255,6 +255,12 @@ public abstract class Module {
         this.disable();
 
         this.init();
+
+        if (!this.ready()) {
+            this.disable();
+            return;
+        }
+
         this.enable();
     }
 
