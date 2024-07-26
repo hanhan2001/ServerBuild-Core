@@ -238,15 +238,19 @@ public abstract class Module {
 
         // unregister Scheduler
         this.schedulers.forEach(Scheduler::stop);
+        this.schedulers.clear();
 
         // unregister listeners
         this.listeners.forEach(HandlerList::unregisterAll);
+        this.listeners.clear();
 
         // unregister commands
         this.commands.forEach(command -> command.getValues().forEach(string -> SBPlugin.unregisterCommand(string, SBPlugin.getInstance())));
+        this.commands.clear();
 
         // unregister files
         this.files.forEach(File::disable);
+        this.files.clear();
 
         this.opened = false;
     }
