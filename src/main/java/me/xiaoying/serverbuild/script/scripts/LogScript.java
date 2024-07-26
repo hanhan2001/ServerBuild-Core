@@ -1,6 +1,7 @@
 package me.xiaoying.serverbuild.script.scripts;
 
 import me.xiaoying.serverbuild.script.Script;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class LogScript implements Script {
@@ -20,6 +21,8 @@ public class LogScript implements Script {
 
             stringBuilder.append(" ");
         }
+
+        Bukkit.getServer().getConsoleSender().sendMessage(stringBuilder.toString());
     }
 
     @Override
