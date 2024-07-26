@@ -4,6 +4,9 @@ import me.xiaoying.serverbuild.script.Script;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+/**
+ * Script log
+ */
 public class LogScript implements Script {
     @Override
     public String getName() {
