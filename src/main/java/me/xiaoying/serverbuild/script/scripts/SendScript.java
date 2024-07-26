@@ -30,7 +30,7 @@ public class SendScript implements Script {
             findPlayer = player;
 
         for (int i = 0; i < args.length; i++) {
-            if (findPlayer == player && i == 0)
+            if (findPlayer != null && i == 0)
                 continue;
 
             stringBuilder.append(args[i]);
