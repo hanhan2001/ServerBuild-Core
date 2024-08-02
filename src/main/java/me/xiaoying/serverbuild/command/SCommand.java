@@ -1,6 +1,5 @@
 package me.xiaoying.serverbuild.command;
 
-import me.xiaoying.serverbuild.module.Module;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
