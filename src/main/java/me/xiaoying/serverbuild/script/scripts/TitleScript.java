@@ -1,5 +1,7 @@
 package me.xiaoying.serverbuild.script.scripts;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import me.xiaoying.serverbuild.script.Script;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -40,8 +42,32 @@ public class TitleScript implements Script {
 
             stringBuilder.append(" ");
         }
-        String title;
+        assert findPlayer != null;
+
+        String title = null;
         String subtitle = null;
+        int in = 10;
+        int stay = 70;
+        int out = 20;
+        // json 格式
+        if (this.isJson(stringBuilder.toString())) {
+            JsonObject jsonObject = JsonParser.parseString(stringBuilder.toString()).getAsJsonObject();
+            if (jsonObject.has("title"))
+                title = jsonObject.get("title").getAsString();
+            if (jsonObject.has("subtitle"))
+                subtitle = jsonObject.get("subtitle").getAsString();
+            if (jsonObject.has("in"))
+                in = jsonObject.get("in").getAsInt();
+            if (jsonObject.has("stay"))
+                stay = jsonObject.get("stay").getAsInt();
+            if (jsonObject.has("out"))
+                out = jsonObject.get("out").getAsInt();
+
+            findPlayer.sendTitle(title, subtitle, in, stay, out);
+            return;
+        }
+
+        // 普通格式
         if (stringBuilder.toString().contains(":")) {
             String[] split = stringBuilder.toString().split(":");
             title = split[0];
@@ -49,12 +75,20 @@ public class TitleScript implements Script {
         } else
             title = stringBuilder.toString();
 
-        assert findPlayer != null;
         findPlayer.sendTitle(title, subtitle, 10, 70, 20);
     }
 
     @Override
     public boolean processFirst() {
         return false;
+    }
+
+    private boolean isJson(String string) {
+        try {
+            JsonParser.parseString(string);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
