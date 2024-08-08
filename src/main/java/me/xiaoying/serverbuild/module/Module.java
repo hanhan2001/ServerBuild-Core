@@ -154,7 +154,7 @@ public abstract class Module {
     /**
      * Get files of module
      *
-     * @return
+     * @return ArrayList
      */
     public List<File> getFiles() {
         return this.files;
