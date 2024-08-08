@@ -7,6 +7,17 @@ public class SimpleFileManager implements FileManager {
     private final List<File> knownFiles = new ArrayList<>();
 
     @Override
+    public File getFile(String file) {
+        for (File knownFile : this.knownFiles) {
+            if (!knownFile.getName().equalsIgnoreCase(file))
+                continue;
+
+            return knownFile;
+        }
+        return null;
+    }
+
+    @Override
     public void register(File file) {
         if (this.knownFiles.contains(file))
             return;

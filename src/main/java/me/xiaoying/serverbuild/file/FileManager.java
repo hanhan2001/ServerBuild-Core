@@ -1,6 +1,8 @@
 package me.xiaoying.serverbuild.file;
 
 public interface FileManager {
+    File getFile(String file);
+
     void register(File file);
 
     void unregister(File file);
