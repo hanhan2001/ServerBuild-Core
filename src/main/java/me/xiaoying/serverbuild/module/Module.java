@@ -152,12 +152,12 @@ public abstract class Module {
     }
 
     /**
-     * Get registered commands of Module
+     * Get files of module
      *
-     * @return ArrayList
+     * @return
      */
-    public List<SCommand> getCommands() {
-        return this.commands;
+    public List<File> getFiles() {
+        return this.files;
     }
 
     /**
@@ -202,6 +202,15 @@ public abstract class Module {
      */
     public void unregisterCommands() {
         this.commands.forEach(this::unregisterCommand);
+    }
+
+    /**
+     * Get registered commands of Module
+     *
+     * @return ArrayList
+     */
+    public List<SCommand> getCommands() {
+        return this.commands;
     }
 
     /**
