@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import me.xiaoying.serverbuild.script.Script;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
@@ -17,7 +18,7 @@ public class TitleScript implements Script {
     }
 
     @Override
-    public void performCommand(Player player, String[] args) {
+    public void performCommand(CommandSender sender, String[] args) {
         StringBuilder stringBuilder = new StringBuilder();
 
         Player findPlayer;
@@ -28,8 +29,12 @@ public class TitleScript implements Script {
         }
 
         findPlayer = Bukkit.getServer().getPlayer(args[0]);
-        if (findPlayer == null)
-            findPlayer = player;
+        if (findPlayer == null && sender instanceof Player)
+            findPlayer = (Player) sender;
+        if (findPlayer == null) {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
+            return;
+        }
 
         for (int i = 0; i < args.length; i++) {
             if (findPlayer != null && i == 0)

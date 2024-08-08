@@ -1,5 +1,6 @@
 package me.xiaoying.serverbuild.script;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
@@ -8,7 +9,7 @@ import org.bukkit.entity.Player;
 public interface Script {
     String getName();
 
-    void performCommand(Player player, String[] args);
+    void performCommand(CommandSender sender, String[] args);
 
     boolean processFirst();
 }

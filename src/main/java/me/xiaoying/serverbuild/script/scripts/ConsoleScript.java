@@ -2,7 +2,7 @@ package me.xiaoying.serverbuild.script.scripts;
 
 import me.xiaoying.serverbuild.script.Script;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 
 /**
  * Script console
@@ -14,7 +14,7 @@ public class ConsoleScript implements Script {
     }
 
     @Override
-    public void performCommand(Player player, String[] args) {
+    public void performCommand(CommandSender sender, String[] args) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < args.length; i++) {
             stringBuilder.append(args[i]);

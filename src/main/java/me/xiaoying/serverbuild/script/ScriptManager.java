@@ -1,6 +1,7 @@
 package me.xiaoying.serverbuild.script;
 
 import me.xiaoying.serverbuild.script.interpreter.InterpreterManager;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface ScriptManager {
 
     void unregisterScripts();
 
-    void performScript(String command, Player player);
+    void performScript(String command, CommandSender sender);
 
     List<String> getScripts();
 

@@ -3,7 +3,7 @@ package me.xiaoying.serverbuild.script.scripts;
 import me.xiaoying.serverbuild.script.Script;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 
 /**
  * Script send
@@ -15,22 +15,21 @@ public class SendScript implements Script {
     }
 
     @Override
-    public void performCommand(Player player, String[] args) {
+    public void performCommand(CommandSender sender, String[] args) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        Player findPlayer;
+        CommandSender findSender;
 
         if (args.length == 0) {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&c错误的命令格式，应当为 &esend [player] 内容"));
             return;
         }
 
-        findPlayer = Bukkit.getServer().getPlayer(args[0]);
-        if (findPlayer == null)
-            findPlayer = player;
+        if ((findSender = Bukkit.getServer().getPlayer(args[0])) == null)
+            findSender = sender;
 
         for (int i = 0; i < args.length; i++) {
-            if (findPlayer != null && i == 0)
+            if (i == 0)
                 continue;
 
             stringBuilder.append(args[i]);
@@ -41,7 +40,7 @@ public class SendScript implements Script {
             stringBuilder.append(" ");
         }
 
-        findPlayer.sendMessage(stringBuilder.toString());
+        findSender.sendMessage(stringBuilder.toString());
     }
 
     @Override
