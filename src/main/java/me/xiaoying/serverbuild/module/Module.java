@@ -1,7 +1,6 @@
 package me.xiaoying.serverbuild.module;
 
 import me.xiaoying.serverbuild.command.Command;
-import me.xiaoying.serverbuild.command.RegisteredCommand;
 import me.xiaoying.serverbuild.command.SCommand;
 import me.xiaoying.serverbuild.core.SBPlugin;
 import me.xiaoying.serverbuild.file.File;
